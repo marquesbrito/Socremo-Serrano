@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sócio Torcedor - Seja parte do time!</title>
+    <meta name="description" content="Seja sócio torcedor do seu clube e apoie o time com planos exclusivos e benefícios incríveis.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-area">
+        <div class="logo-icon">
+            <i class="fas fa-futbol"></i>
+        </div>
+        <div>
+            <h2>SOCREMO SERRANO</h2>
+            <span>Clube de Futebol</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#home">Início</a>
+        <a href="#planos">Planos</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#cadastro">Cadastro</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <a class="btn-whatsapp" href="https://wa.me/5583996775655" target="_blank">
+        <i class="fab fa-whatsapp"></i> Fale Conosco
+    </a>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="overlay"></div>
+    <div class="hero-content">
+        <h1>SEJA<br><span>SÓCIO TORCEDOR</span></h1>
+        <p>Sua contribuição fortalece o clube, incentiva nossas categorias de base e ajuda o time a crescer cada vez mais.</p>
+        <a href="#planos" class="btn-primary"><i class="fas fa-check-circle"></i> QUERO SER SÓCIO</a>
+    </div>
+</section>
+
+<section class="benefits-bar" id="beneficios">
+    <div class="benefit-item">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Apoie o Clube</h3>
+        <p>Ajude seu time a crescer.</p>
+    </div>
+    <div class="benefit-item">
+        <i class="fas fa-users"></i>
+        <h3>Fortaleça a Base</h3>
+        <p>Investindo no futuro.</p>
+    </div>
+    <div class="benefit-item">
+        <i class="fas fa-gift"></i>
+        <h3>Mais Benefícios</h3>
+        <p>Participe de promoções.</p>
+    </div>
+    <div class="benefit-item">
+        <i class="fas fa-trophy"></i>
+        <h3>Faça Parte</h3>
+        <p>Seja um torcedor oficial.</p>
+    </div>
+</section>
+
+<section class="plans" id="planos">
+    <h2>ESCOLHA SEU PLANO</h2>
+    <p class="subtitle">O plano perfeito para o seu nível de paixão pelo clube</p>
+
+    <div class="cards">
+        <div class="card green" data-plano="Gavião - R$15/mês">
+            <div class="card-icon"><i class="fas fa-dove"></i></div>
+            <h3>PLANO</h3>
+            <h1>GAVIÃO</h1>
+            <div class="price">R$ 15,00 <span>/mês</span></div>
+            <ul>
+                <li><i class="fas fa-check"></i> Carteirinha digital</li>
+                <li><i class="fas fa-check"></i> Grupo exclusivo</li>
+                <li><i class="fas fa-check"></i> Apoiador oficial</li>
+            </ul>
+            <button class="btn-card" data-plano-select="Gavião - R$15/mês">ASSINAR AGORA <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="card blue featured" data-plano="Lobo - R$30/mês">
+            <div class="popular-badge">MAIS POPULAR</div>
+            <div class="card-icon"><i class="fas fa-wolf-pack-battalion"></i></div>
+            <h3>PLANO</h3>
+            <h1>LOBO</h1>
+            <div class="price">R$ 30,00 <span>/mês</span></div>
+            <ul>
+                <li><i class="fas fa-check"></i> Todos benefícios anteriores</li>
+                <li><i class="fas fa-check"></i> Sorteios exclusivos</li>
+                <li><i class="fas fa-check"></i> Prioridade em eventos</li>
+            </ul>
+            <button class="btn-card" data-plano-select="Lobo - R$30/mês">ASSINAR AGORA <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="card gold" data-plano="Elite - R$45/mês">
+            <div class="card-icon"><i class="fas fa-crown"></i></div>
+            <h3>PLANO</h3>
+            <h1>ELITE</h1>
+            <div class="price">R$ 45,00 <span>/mês</span></div>
+            <ul>
+                <li><i class="fas fa-check"></i> Benefícios VIP</li>
+                <li><i class="fas fa-check"></i> Descontos especiais</li>
+                <li><i class="fas fa-check"></i> Experiências exclusivas</li>
+            </ul>
+            <button class="btn-card" data-plano-select="Elite - R$45/mês">ASSINAR AGORA <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<section class="register" id="cadastro">
+    <div class="form-area">
+        <h2><i class="fas fa-user-plus"></i> FAÇA SEU CADASTRO</h2>
+        <p>Preencha os dados e comece a torcer com ainda mais vantagens</p>
+
+        <form id="signup-form">
+            <input type="text" id="nome" placeholder="Nome completo" required>
+            <input type="text" id="cpf" placeholder="CPF" maxlength="14" oninput="mascararCPF(this)" required>
+            <input type="text" id="whatsapp" placeholder="WhatsApp (com DDD)" maxlength="16" oninput="mascararTelefone(this)" required>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="text" id="cidade" placeholder="Cidade / Estado" required>
+            <select id="planoSelect" required>
+                <option value="">Plano escolhido</option>
+                <option>Gavião - R$15/mês</option>
+                <option>Lobo - R$30/mês</option>
+                <option>Elite - R$45/mês</option>
+            </select>
+            <button type="submit"><i class="fas fa-paper-plane"></i> CADASTRAR AGORA</button>
+        </form>
+    </div>
+
+    <div class="payment-area">
+        <div class="payment-image">
+            <i class="fas fa-futbol"></i>
+            <h3>Time Oficial</h3>
+        </div>
+        <div class="payment-box">
+            <h2><i class="fas fa-credit-card"></i> FORMAS DE PAGAMENTO</h2>
+            <div class="payment-methods">
+                <span><i class="fab fa-pix"></i> PIX</span>
+                <span><i class="fab fa-cc-mastercard"></i> Mastercard</span>
+                <span><i class="fab fa-cc-visa"></i> Visa</span>
+                <span><i class="fab fa-cc-amex"></i> Amex</span>
+            </div>
+            <p><strong>PIX CNPJ:</strong> 00.000.000/0001-00</p>
+            <p><i class="fab fa-mercadopago"></i> Mercado Pago disponível</p>
+            <a href="https://wa.me/558396775655" target="_blank">
+                <i class="fab fa-whatsapp"></i> DÚVIDAS? CHAME NO WHATSAPP
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <i class="fas fa-futbol"></i>
+            <h2>JUNTOS VENCEREMOS!</h2>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2026 - DESENVOLVIDOR PELA UNITECH. Todos os direitos reservados.</p>
+        <p>Contato: (83) 99972-4047</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<!-- Importações do Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, query, where, getDocs, updateDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA5EbYuiuvPtT1C7wjlEg86R8zg_T_NbA0",
+    authDomain: "socio-torcedor-6bbd4.firebaseapp.com",
+    projectId: "socio-torcedor-6bbd4",
+    storageBucket: "socio-torcedor-6bbd4.firebasestorage.app",
+    messagingSenderId: "841363123959",
+    appId: "1:841363123959:web:17eb1a432921fd34d82df2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.db = db;
+  window.addDoc = addDoc;
+  window.collection = collection;
+  window.query = query;
+  window.where = where;
+  window.getDocs = getDocs;
+  window.updateDoc = updateDoc;
+  window.doc = doc;
+  window.setDoc = setDoc;
+  window.getDoc = getDoc;
+</script>
+</script>
+<!-- Seu script.js (deve ser do tipo module também) -->
+<script type="module" src="script.js"></script>
+</body>
+</html>

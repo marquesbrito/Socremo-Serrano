@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado - Sócio Torcedor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="obrigado.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-futbol"></i></div>
+        <div><h2>SOCREMO SERRANO</h2><span>Clube de Futebol</span></div>
+    </div>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#beneficios">Benefícios</a>
+        <a href="index.html#cadastro">Cadastro</a>
+    </nav>
+    <a class="btn-whatsapp" href="https://wa.me/5583996775655" target="_blank"><i class="fab fa-whatsapp"></i> Fale Conosco</a>
+</header>
+
+<div class="obrigado-container">
+    <div class="obrigado-card">
+        <i class="fas fa-check-circle" style="font-size: 70px; color: #27ae60; margin-bottom: 20px;"></i>
+        <h1>CADASTRO REALIZADO COM SUCESSO!</h1>
+        <p>Seus dados foram salvos. Agora você pode prosseguir para o pagamento ou gerar sua carteirinha digital (após o pagamento).</p>
+        
+        <div class="dados-resumo" id="dadosResumo">
+            <!-- Preenchido via JS -->
+        </div>
+        
+        <div class="botoes-acoes">
+            <a href="#" id="btnPagamento" class="btn-pagamento"><i class="fas fa-credit-card"></i> IR PARA PAGAMENTO</a>
+            <button id="btnCarteirinha" class="btn-carteirinha"><i class="fas fa-id-card"></i> GERAR CARTEIRINHA DIGITAL</button>
+            <button id="btnWhatsApp" class="btn-whatsapp-envio"><i class="fab fa-whatsapp"></i> ENVIAR DADOS POR WHATSAPP</button>
+            <button id="btnEmail" class="btn-email"><i class="fas fa-envelope"></i> ENVIAR POR E-MAIL</button>
+        </div>
+        
+        <a href="index.html" class="btn-voltar-home"><i class="fas fa-home"></i> Voltar para o site</a>
+    </div>
+</div>
+
+<script src="obrigado.js"></script>
+</body>
+</html>

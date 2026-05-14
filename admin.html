@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Socremo Serrano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #00163b 0%, #021b44 100%); min-height: 100vh; padding: 20px; color: #fff; }
+        .admin-container { max-width: 1400px; margin: 0 auto; }
+        .card { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border-radius: 28px; padding: 25px; border: 1px solid rgba(255,255,255,0.15); }
+        .logo { font-size: 1.8rem; font-weight: 800; color: #27ae60; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .logo i { background: #27ae60; color: #021b44; padding: 8px; border-radius: 50%; }
+        .stats-cards { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
+        .stat-card { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 15px 20px; flex: 1; text-align: center; }
+        .stat-card i { font-size: 28px; color: #f1c40f; }
+        .stat-card span { font-size: 28px; font-weight: bold; display: block; }
+        .table-responsive { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); }
+        th { background: rgba(0,0,0,0.35); color: #f1c40f; }
+        tr:hover { background: rgba(39,174,96,0.1); }
+        .btn-confirmar { background: #27ae60; color: white; border: none; padding: 6px 12px; border-radius: 30px; cursor: pointer; margin-right: 5px; }
+        .btn-edit { background: #f39c12; color: #021b44; border: none; padding: 6px 12px; border-radius: 30px; cursor: pointer; margin-right: 5px; }
+        .btn-delete { background: #c0392b; color: white; border: none; padding: 6px 12px; border-radius: 30px; cursor: pointer; }
+        .btn-limpar { background: #c0392b; padding: 10px 20px; border-radius: 40px; border: none; color: white; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-sair, .btn-voltar { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 30px; border: none; color: white; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .hidden { display: none; }
+        input, select { width: 100%; padding: 12px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); color: #fff; margin-bottom: 10px; }
+        .btn { background: linear-gradient(135deg, #27ae60, #1e7a44); padding: 14px; border-radius: 50px; border: none; color: white; font-weight: bold; cursor: pointer; width: 100%; }
+        .badge-confirmado { background: #27ae60; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; display: inline-block; }
+        .badge-pendente { background: #e67e22; padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; display: inline-block; }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #021b44; border-radius: 28px; padding: 30px; width: 90%; max-width: 500px; border: 1px solid #27ae60; }
+        .close { float: right; font-size: 28px; cursor: pointer; }
+        @media (max-width: 768px) { th, td { font-size: 12px; padding: 8px; } }
+    </style>
+</head>
+<body>
+
+<div id="loginScreen" class="admin-container">
+    <div class="card" style="max-width: 400px; margin: 0 auto; text-align: center;">
+        <div class="logo" style="justify-content: center;"><i class="fas fa-shield-alt"></i> Área Restrita</div>
+        <h2>Acesso Administrativo</h2>
+        <input type="password" id="senhaAdmin" placeholder="Digite a senha" style="margin: 20px 0;">
+        <button id="btnEntrar" class="btn">Entrar</button>
+        <p id="msgErro" style="color:#e67e22; margin-top:10px; display:none;">Senha incorreta</p>
+    </div>
+</div>
+
+<div id="painelScreen" class="admin-container hidden">
+    <div class="card">
+        <div class="logo">
+            <i class="fas fa-futbol"></i> SOCREMO SERRANO
+            <span style="margin-left: auto; background:#27ae60; padding: 4px 12px; border-radius: 30px;"><i class="fas fa-database"></i> Firebase</span>
+            <a href="index.html" class="btn-voltar"><i class="fas fa-home"></i> Site</a>
+            <button id="btnSair" class="btn-sair"><i class="fas fa-sign-out-alt"></i> Sair</button>
+        </div>
+
+        <div class="stats-cards">
+            <div class="stat-card"><i class="fas fa-users"></i> <span id="totalSocios">0</span> <small>Total sócios</small></div>
+            <div class="stat-card"><i class="fas fa-check-circle"></i> <span id="totalConfirmados">0</span> <small>Confirmados</small></div>
+            <div class="stat-card"><i class="fas fa-clock"></i> <span id="totalPendentes">0</span> <small>Pendentes</small></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin: 20px 0;">
+            <h2><i class="fas fa-list"></i> Lista de Sócios</h2>
+            <button id="btnLimparTudo" class="btn-limpar"><i class="fas fa-trash-alt"></i> LIMPAR TODOS</button>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="🔍 Buscar por nome, CPF, e-mail..." style="margin-bottom: 20px;">
+
+        <div class="table-responsive">
+            <table>
+                <thead><tr><th>Data</th><th>Nome</th><th>CPF</th><th>WhatsApp</th><th>Plano</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody id="tabelaSocios"><tr><td colspan="7">Carregando...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar Sócio</h2>
+        <form id="editForm">
+            <input type="hidden" id="editId">
+            <input type="text" id="editNome" placeholder="Nome" required>
+            <input type="text" id="editCpf" placeholder="CPF" required>
+            <input type="text" id="editWhatsapp" placeholder="WhatsApp" required>
+            <input type="email" id="editEmail" placeholder="E-mail" required>
+            <input type="text" id="editCidade" placeholder="Cidade" required>
+            <select id="editPlano" required>
+                <option>Gavião - R$15/mês</option>
+                <option>Lobo - R$30/mês</option>
+                <option>Elite - R$45/mês</option>
+            </select>
+            <button type="submit" class="btn">Salvar</button>
+        </form>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, updateDoc, doc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyA5EbYuiuvPtT1C7wjlEg86R8zg_T_NbA0",
+        authDomain: "socio-torcedor-6bbd4.firebaseapp.com",
+        projectId: "socio-torcedor-6bbd4",
+        storageBucket: "socio-torcedor-6bbd4.firebasestorage.app",
+        messagingSenderId: "841363123959",
+        appId: "1:841363123959:web:17eb1a432921fd34d82df2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const SENHA_ADMIN = "admin123";
+    let unsubscribe = null;
+
+    if (localStorage.getItem("adminLogado") === "true") {
+        document.getElementById("loginScreen").classList.add("hidden");
+        document.getElementById("painelScreen").classList.remove("hidden");
+        carregarSocios();
+    }
+
+    document.getElementById("btnEntrar")?.addEventListener("click", () => {
+        const senha = document.getElementById("senhaAdmin").value;
+        if (senha === SENHA_ADMIN) {
+            localStorage.setItem("adminLogado", "true");
+            document.getElementById("loginScreen").classList.add("hidden");
+            document.getElementById("painelScreen").classList.remove("hidden");
+            carregarSocios();
+        } else {
+            const msg = document.getElementById("msgErro");
+            msg.style.display = "block";
+            setTimeout(() => msg.style.display = "none", 3000);
+        }
+    });
+
+    document.getElementById("btnSair")?.addEventListener("click", () => {
+        localStorage.removeItem("adminLogado");
+        if (unsubscribe) unsubscribe();
+        document.getElementById("painelScreen").classList.add("hidden");
+        document.getElementById("loginScreen").classList.remove("hidden");
+    });
+
+    function carregarSocios() {
+        const sociosRef = collection(db, "socios");
+        unsubscribe = onSnapshot(sociosRef, (snapshot) => {
+            let socios = [];
+            snapshot.forEach(docSnap => {
+                socios.push({ id: docSnap.id, ...docSnap.data() });
+            });
+
+            const search = document.getElementById("searchInput")?.value.toLowerCase() || "";
+            let filtrados = socios;
+            if (search) {
+                filtrados = socios.filter(s => 
+                    s.nome?.toLowerCase().includes(search) || 
+                    s.cpf?.includes(search) || 
+                    s.email?.toLowerCase().includes(search)
+                );
+            }
+
+            const total = socios.length;
+            const confirmados = socios.filter(s => s.confirmado === true).length;
+            const pendentes = total - confirmados;
+
+            document.getElementById("totalSocios").innerText = total;
+            document.getElementById("totalConfirmados").innerText = confirmados;
+            document.getElementById("totalPendentes").innerText = pendentes;
+
+            const tbody = document.getElementById("tabelaSocios");
+            if (filtrados.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7">Nenhum sócio encontrado.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = "";
+            filtrados.forEach(socio => {
+                const tr = document.createElement("tr");
+                const data = socio.dataAssociacao || (socio.createdAt ? new Date(socio.createdAt).toLocaleDateString('pt-BR') : "-");
+                const statusHtml = socio.confirmado ? '<span class="badge-confirmado">✅ Confirmado</span>' : '<span class="badge-pendente">⏳ Pendente</span>';
+                tr.innerHTML = `
+                    <td>${data}</td>
+                    <td><strong>${socio.nome || "-"}</strong></td>
+                    <td>${socio.cpf || "-"}</td>
+                    <td>${socio.whatsapp || "-"}</td>
+                    <td>${socio.plano || "-"}</td>
+                    <td>${statusHtml}</td>
+                    <td>
+                        ${!socio.confirmado ? `<button class="btn-confirmar" data-id="${socio.id}"><i class="fas fa-check"></i> Confirmar</button>` : ''}
+                        <button class="btn-edit" data-id="${socio.id}"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn-delete" data-id="${socio.id}"><i class="fas fa-trash"></i> Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.querySelectorAll(".btn-confirmar").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
+                    const id = btn.getAttribute("data-id");
+                    await updateDoc(doc(db, "socios", id), { confirmado: true });
+                    alert("Sócio confirmado com sucesso!");
+                });
+            });
+            document.querySelectorAll(".btn-edit").forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const id = btn.getAttribute("data-id");
+                    const socio = filtrados.find(s => s.id === id);
+                    if (socio) abrirModalEditar(socio);
+                });
+            });
+            document.querySelectorAll(".btn-delete").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
+                    if (confirm("Excluir este sócio permanentemente?")) {
+                        const id = btn.getAttribute("data-id");
+                        await deleteDoc(doc(db, "socios", id));
+                        alert("Removido!");
+                    }
+                });
+            });
+        });
+    }
+
+    function abrirModalEditar(socio) {
+        document.getElementById("editId").value = socio.id;
+        document.getElementById("editNome").value = socio.nome || "";
+        document.getElementById("editCpf").value = socio.cpf || "";
+        document.getElementById("editWhatsapp").value = socio.whatsapp || "";
+        document.getElementById("editEmail").value = socio.email || "";
+        document.getElementById("editCidade").value = socio.cidade || "";
+        document.getElementById("editPlano").value = socio.plano || "";
+        document.getElementById("editModal").style.display = "flex";
+    }
+
+    document.querySelector(".close")?.addEventListener("click", () => {
+        document.getElementById("editModal").style.display = "none";
+    });
+    window.addEventListener("click", (e) => {
+        if (e.target === document.getElementById("editModal")) document.getElementById("editModal").style.display = "none";
+    });
+
+    document.getElementById("editForm")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const id = document.getElementById("editId").value;
+        const dados = {
+            nome: document.getElementById("editNome").value,
+            cpf: document.getElementById("editCpf").value,
+            whatsapp: document.getElementById("editWhatsapp").value,
+            email: document.getElementById("editEmail").value,
+            cidade: document.getElementById("editCidade").value,
+            plano: document.getElementById("editPlano").value
+        };
+        await updateDoc(doc(db, "socios", id), dados);
+        document.getElementById("editModal").style.display = "none";
+        alert("Atualizado com sucesso!");
+    });
+
+    // 🔥 BOTÃO LIMPAR TODOS CORRIGIDO (exclui todos os documentos de uma vez)
+    document.getElementById("btnLimparTudo")?.addEventListener("click", async () => {
+        if (confirm("⚠️ Isso apagará TODOS os sócios. Digite 'SIM' para confirmar.")) {
+            const confirmacao = prompt("Digite SIM para confirmar a exclusão de TODOS os registros:");
+            if (confirmacao !== "SIM") {
+                alert("❌ Operação cancelada.");
+                return;
+            }
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "socios"));
+                if (querySnapshot.empty) {
+                    alert("Nenhum sócio para excluir.");
+                    return;
+                }
+
+                let deletados = 0;
+                for (const docSnap of querySnapshot.docs) {
+                    await deleteDoc(doc(db, "socios", docSnap.id));
+                    deletados++;
+                }
+                alert(`✅ ${deletados} sócios foram removidos com sucesso!`);
+            } catch (error) {
+                console.error("Erro ao excluir todos:", error);
+                alert("❌ Erro ao excluir: " + error.message);
+            }
+        }
+    });
+
+    document.getElementById("searchInput")?.addEventListener("keyup", () => carregarSocios());
+    if (localStorage.getItem("adminLogado") === "true") carregarSocios();
+</script>
+</body>
+</html>

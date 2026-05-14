@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Carteirinha - Sócio Torcedor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="carteirinha.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+<header style="position: relative; margin-bottom: 20px;">
+    <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-futbol"></i></div>
+        <div><h2>SOCREMO SERRANO</h2><span>Clube de Futebol</span></div>
+    </div>
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#beneficios">Benefícios</a>
+        <a href="index.html#cadastro">Cadastro</a>
+    </nav>
+    <a class="btn-whatsapp" href="https://wa.me/5583996775655" target="_blank"><i class="fab fa-whatsapp"></i> Fale Conosco</a>
+</header>
+
+<div class="carteirinha-container">
+    <div id="carteirinhaDigital" class="carteirinha">
+        <!-- Fundo decorativo -->
+        <div class="watermark"><i class="fas fa-futbol"></i></div>
+        
+        <div class="carteirinha-header">
+            <div class="escudo">
+                <i class="fas fa-futbol"></i>
+            </div>
+            <div class="clube-info">
+                <h2>SOCREMO SERRANO</h2>
+                <span>Clube de Futebol</span>
+            </div>
+            <div class="selo-validade">
+                <i class="fas fa-check-circle"></i>
+                <span>Válido</span>
+            </div>
+        </div>
+
+        <div class="carteirinha-corpo">
+            <div class="foto-socio">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dados-socio" id="socioInfo">
+                <!-- Preenchido via JS -->
+            </div>
+            <div class="qr-code-box" id="qrCodeBox">
+                <div class="qr-code-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <p>Associado oficial</p>
+            </div>
+        </div>
+
+        <div class="carteirinha-footer">
+            <div class="validade">
+                <span>Válido até:</span>
+                <strong id="dataValidadeFooter">---</strong>
+            </div>
+            <div class="numero-associado">
+                <span>Nº Associado:</span>
+                <strong id="numeroAssociadoFooter">---</strong>
+            </div>
+        </div>
+    </div>
+    
+    <div class="botoes-carteirinha">
+        <button class="btn-baixar" id="baixarCarteirinha"><i class="fas fa-download"></i> Baixar Carteirinha (PNG)</button>
+        <button class="btn-voltar" id="voltarHome"><i class="fas fa-home"></i> Voltar para o site</button>
+    </div>
+</div>
+
+<script src="carteirinha.js"></script>
+</body>
+</html>

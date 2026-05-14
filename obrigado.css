@@ -1,0 +1,90 @@
+.obrigado-container {
+    max-width: 800px;
+    margin: 100px auto 50px;
+    padding: 20px;
+}
+
+.obrigado-card {
+    background: white;
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    color: #333;
+}
+
+.obrigado-card h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #021b44;
+}
+
+.dados-resumo {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: left;
+    font-size: 14px;
+}
+
+.dados-resumo p {
+    margin: 8px 0;
+}
+
+.botoes-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.botoes-acoes button, .botoes-acoes a {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-pagamento {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.btn-carteirinha {
+    background: linear-gradient(135deg, #27ae60, #1e7a44);
+    color: white;
+}
+
+.btn-whatsapp-envio {
+    background: #25d366;
+    color: white;
+}
+
+.btn-email {
+    background: #3498db;
+    color: white;
+}
+
+.btn-voltar-home {
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.botoes-acoes button:hover, .botoes-acoes a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
